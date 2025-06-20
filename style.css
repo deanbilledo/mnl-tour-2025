@@ -1,0 +1,776 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #1c1e21;
+    background-color: #f0f2f5;
+    font-size: 15px;
+}
+
+/* Navigation - Facebook style */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #dadde1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 56px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    height: 100%;
+}
+
+.nav-brand {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1877f2;
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #65676b;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.nav-links a:hover {
+    background-color: #f2f3f5;
+    color: #1877f2;
+}
+
+.nav-links a.active {
+    color: #1877f2;
+    background-color: #e7f3ff;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.hamburger:hover {
+    background-color: #f2f3f5;
+}
+
+.hamburger span {
+    width: 20px;
+    height: 2px;
+    background: #65676b;
+    margin: 2px 0;
+    transition: 0.3s;
+    border-radius: 1px;
+}
+
+/* Hero Section - Facebook Cover Photo Style */
+.hero {
+    margin-top: 56px;
+    position: relative;
+    height: 400px;
+    background: linear-gradient(135deg, #1877f2 0%, #42a5f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 6px 16px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+    line-height: 1.2;
+}
+
+.title-line {
+    display: block;
+}
+
+.title-line.highlight {
+    background: linear-gradient(45deg, #fff, #e3f2fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    font-weight: 400;
+    margin-bottom: 32px;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+.hero-cta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.cta-primary, .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.cta-primary {
+    background: #ffffff;
+    color: #1877f2;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cta-primary:hover {
+    background: #f5f6f7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.cta-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Journey Preview - Facebook Story Style */
+.hero-journey-preview {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.journey-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    backdrop-filter: blur(10px);
+}
+
+.journey-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.journey-icon {
+    font-size: 1.5rem;
+}
+
+.journey-text {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0.95;
+}
+
+.journey-divider {
+    display: none;
+}
+
+/* Profile-like Content Container */
+.content-wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 16px;
+}
+
+/* Facebook Post Style Sections */
+.section {
+    margin-bottom: 20px;
+}
+
+.post-container {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.post-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid #dadde1;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1c1e21;
+    margin-bottom: 4px;
+}
+
+.section-intro {
+    font-size: 15px;
+    color: #65676b;
+    line-height: 1.33;
+}
+
+.post-content {
+    padding: 16px;
+}
+
+/* Timeline - Facebook Post Feed Style */
+.timeline {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.timeline::before {
+    display: none;
+}
+
+.timeline-item {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.timeline-date {
+    position: static;
+    transform: none;
+    background: #1877f2;
+    color: white;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.timeline-content {
+    width: 100%;
+    padding: 16px;
+    margin: 0 !important;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+}
+
+.timeline-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1c1e21;
+}
+
+.timeline-content p {
+    color: #1c1e21;
+    line-height: 1.33;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.photo-placeholder {
+    margin-top: 12px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.photo-placeholder:hover {
+    transform: scale(1.02);
+}
+
+.timeline-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #f0f2f5;
+    border: 1px solid #dadde1;
+}
+
+.photo-caption {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: #65676b;
+    font-style: normal;
+    padding: 0 4px;
+}
+
+/* Company Cards - Facebook Group Style */
+.companies-section {
+    background: #f0f2f5;
+    padding: 20px 0;
+}
+
+.companies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.company-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.company-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.company-photo {
+    position: relative;
+    height: 200px;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.company-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f0f2f5;
+    border: 1px dashed #bcc0c4;
+}
+
+.company-photo:hover .company-image {
+    border-color: #1877f2;
+}
+
+.company-content {
+    padding: 16px;
+}
+
+.company-content h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1c1e21;
+}
+
+.company-content p {
+    color: #65676b;
+    line-height: 1.33;
+    font-size: 14px;
+}
+
+/* Adventure Grid - Facebook Photo Album Style */
+.adventure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.adventure-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.adventure-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.adventure-photo {
+    position: relative;
+    height: 200px;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.adventure-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f0f2f5;
+    border: 1px dashed #bcc0c4;
+}
+
+.adventure-card h3 {
+    padding: 12px 16px 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1c1e21;
+}
+
+.adventure-card p {
+    padding: 0 16px 16px;
+    color: #65676b;
+    line-height: 1.33;
+    font-size: 14px;
+}
+
+/* Insights Grid - Facebook Card Style */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.insight-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+}
+
+.insight-card:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.insight-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.insight-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1c1e21;
+}
+
+.insight-card p {
+    color: #65676b;
+    line-height: 1.33;
+    font-size: 14px;
+}
+
+/* CTA Section - Facebook Event Style */
+.cta-section {
+    background: white;
+    border-top: 1px solid #dadde1;
+    border-bottom: 1px solid #dadde1;
+    padding: 32px 0;
+    margin: 20px 0;
+}
+
+.cta-section .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #1c1e21;
+}
+
+.cta-section p {
+    font-size: 16px;
+    margin-bottom: 24px;
+    color: #65676b;
+}
+
+.next-steps {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+    list-style: none;
+    background: #f7f8fa;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.next-steps li {
+    padding: 8px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.33;
+    color: #1c1e21;
+}
+
+.next-steps li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #42b883;
+    font-weight: bold;
+}
+
+/* Footer - Facebook Style */
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #dadde1;
+    text-align: center;
+    padding: 24px 0;
+    margin-top: 40px;
+}
+
+.footer p {
+    color: #65676b;
+    font-size: 13px;
+}
+
+/* Section Wrappers for Facebook-like layout */
+.bg-subtle {
+    background-color: #f0f2f5;
+    padding: 20px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 56px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 20px;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links a {
+        font-size: 18px;
+        padding: 16px 24px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
+    
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    
+    .hero {
+        height: 300px;
+    }
+    
+    .hero-journey-preview {
+        gap: 8px;
+    }
+    
+    .journey-item {
+        min-width: 70px;
+        padding: 12px 8px;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-primary, .cta-secondary {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .companies-grid,
+    .adventure-grid,
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline {
+        padding: 0 8px;
+    }
+    
+    .content-wrapper {
+        padding: 20px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 12px;
+    }
+    
+    .hero-content {
+        padding: 0 12px;
+    }
+    
+    .timeline-content {
+        padding: 12px;
+    }
+    
+    .company-content,
+    .insight-card {
+        padding: 12px;
+    }
+    
+    .container {
+        padding: 0 8px;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Remove old gradient orb animations */
+.gradient-orb {
+    display: none;
+}
+
+/* Hide scroll indicator for cleaner Facebook look */
+.hero-scroll-indicator {
+    display: none;
+}
