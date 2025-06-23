@@ -83,32 +83,32 @@ document.querySelectorAll('.company-card, .adventure-card, .insight-card').forEa
 });
 
 // Stats Counter Animation
-const statsNumbers = document.querySelectorAll('.stat-number');
-let hasAnimated = false;
+// const statsNumbers = document.querySelectorAll('.stat-number');
+// let hasAnimated = false;
 
-const animateStats = () => {
-    if (hasAnimated) return;
+// const animateStats = () => {
+//     if (hasAnimated) return;
     
-    statsNumbers.forEach(stat => {
-        const finalNumber = stat.textContent;
-        if (finalNumber !== '∞') {
-            let currentNumber = 0;
-            const increment = parseInt(finalNumber) / 30;
+//     statsNumbers.forEach(stat => {
+//         const finalNumber = stat.textContent;
+//         if (finalNumber !== '∞') {
+//             let currentNumber = 0;
+//             const increment = parseInt(finalNumber) / 30;
             
-            const counter = setInterval(() => {
-                currentNumber += increment;
-                if (currentNumber >= parseInt(finalNumber)) {
-                    stat.textContent = finalNumber;
-                    clearInterval(counter);
-                } else {
-                    stat.textContent = Math.floor(currentNumber);
-                }
-            }, 50);
-        }
-    });
+//             const counter = setInterval(() => {
+//                 currentNumber += increment;
+//                 if (currentNumber >= parseInt(finalNumber)) {
+//                     stat.textContent = finalNumber;
+//                     clearInterval(counter);
+//                 } else {
+//                     stat.textContent = Math.floor(currentNumber);
+//                 }
+//             }, 50);
+//         }
+//     });
     
-    hasAnimated = true;
-};
+//     hasAnimated = true;
+// };
 
 // Trigger stats animation when hero section is visible
 const heroObserver = new IntersectionObserver((entries) => {
@@ -156,30 +156,6 @@ document.querySelectorAll('.company-card, .adventure-card, .insight-card').forEa
     
     card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Photo placeholder click handlers for future image uploads
-document.querySelectorAll('.photo-placeholder, .company-photo, .adventure-photo').forEach(placeholder => {
-    placeholder.addEventListener('click', () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'image/*';
-        input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const img = placeholder.querySelector('img');
-                    if (img) {
-                        img.src = e.target.result;
-                        img.style.border = 'none';
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-        input.click();
     });
 });
 
@@ -260,4 +236,107 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Observe all elements that need animation
+    const animateElements = document.querySelectorAll('.timeline-item, .section, .company-card, .adventure-card, .insight-card');
+    
+    animateElements.forEach((el, index) => {
+        // Add staggered delay for timeline items
+        if (el.classList.contains('timeline-item')) {
+            el.style.transitionDelay = `${index * 0.1}s`;
+        }
+        observer.observe(el);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 120; // Account for fixed navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+
+    // Enhanced scroll animations with better performance
+    let ticking = false;
+
+    function updateOnScroll() {
+        // Navbar parallax effect
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.5;
+        
+        // Only update if needed
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                // Add any additional scroll effects here
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    window.addEventListener('scroll', updateOnScroll);
+
+    // Preload animations - show visible elements immediately
+    setTimeout(() => {
+        const viewportHeight = window.innerHeight;
+        animateElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < viewportHeight && rect.bottom > 0) {
+                el.classList.add('visible');
+            }
+        });
+    }, 100);
 });
