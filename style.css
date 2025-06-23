@@ -631,124 +631,8 @@ body {
     border: 1px solid rgba(232, 234, 237, 0.8);
     margin-bottom: 32px;
     overflow: hidden;
-    opacity: 1; /* Changed from 0 to 1 - fallback for no JS */
-    transform: translateY(0) scale(1); /* Changed from translateY(50px) scale(0.95) */
-    transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
-    position: relative;
-}
-
-/* Only apply initial hidden state if JS is enabled */
-.js-enabled .timeline-item {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #4285f4, #34a853, #fbbc04, #ea4335);
-    opacity: 1; /* Changed from 0 to 1 */
-    transition: opacity 0.5s ease;
-}
-
-.timeline-item.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.timeline-item.visible::before {
-    opacity: 1;
-}
-
-/* Company Cards - Enhanced Glassmorphism */
-.company-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(232, 234, 237, 0.8);
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    opacity: 1; /* Changed from 0 to 1 */
-    transform: translateY(0); /* Changed from translateY(30px) */
-}
-
-.js-enabled .company-card {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.company-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Adventure Grid - Enhanced Cards */
-.adventure-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid rgba(232, 234, 237, 0.8);
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    opacity: 1; /* Changed from 0 to 1 */
-    transform: translateY(0); /* Changed from translateY(30px) */
-}
-
-.js-enabled .adventure-card {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.adventure-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Insights Grid - Enhanced Cards */
-.insight-card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    padding: 32px 24px;
-    border-radius: 16px;
-    text-align: center;
-    border: 1px solid rgba(232, 234, 237, 0.8);
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    position: relative;
-    opacity: 1; /* Changed from 0 to 1 */
-    transform: translateY(0); /* Changed from translateY(30px) */
-}
-
-.js-enabled .insight-card {
-    opacity: 0;
-    transform: translateY(30px);
-}
-
-.insight-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ...rest of existing code... */
-/* Timeline - Enhanced with Smooth Scrolling */
-.timeline {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 24px;
-}
-
-.timeline-item {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border: 1px solid rgba(232, 234, 237, 0.8);
-    margin-bottom: 32px;
-    overflow: hidden;
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
+    opacity: 1; /* Always visible */
+    transform: translateY(0) scale(1); /* No animation offset */
     transition: all 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
     position: relative;
 }
@@ -761,17 +645,8 @@ body {
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, #4285f4, #34a853, #fbbc04, #ea4335);
-    opacity: 0;
+    opacity: 1; /* Always visible */
     transition: opacity 0.5s ease;
-}
-
-.timeline-item.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.timeline-item.visible::before {
-    opacity: 1;
 }
 
 .timeline-item:hover {
@@ -852,7 +727,7 @@ body {
 
 .timeline-photo {
     width: 100%;
-    height: 320px;
+  
     object-fit: cover;
     border-radius: 12px;
     background-color: #f8f9fa;
@@ -905,6 +780,11 @@ body {
     overflow: hidden;
     border: 1px solid rgba(232, 234, 237, 0.8);
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateY(0); /* Changed from translateY(30px) */
+}
+
+.js-enabled .company-card {
     opacity: 0;
     transform: translateY(30px);
 }
@@ -981,6 +861,11 @@ body {
     overflow: hidden;
     border: 1px solid rgba(232, 234, 237, 0.8);
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateY(0); /* Changed from translateY(30px) */
+}
+
+.js-enabled .adventure-card {
     opacity: 0;
     transform: translateY(30px);
 }
@@ -1055,6 +940,11 @@ body {
     border: 1px solid rgba(232, 234, 237, 0.8);
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     position: relative;
+    opacity: 1; /* Changed from 0 to 1 */
+    transform: translateY(0); /* Changed from translateY(30px) */
+}
+
+.js-enabled .insight-card {
     opacity: 0;
     transform: translateY(30px);
 }
@@ -1306,6 +1196,10 @@ body {
     .container {
         padding: 0 16px;
     }
+    
+    .timeline-item {
+        scroll-margin-top: 120px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1394,11 +1288,6 @@ body {
 .hero-scroll-indicator {
     display: none;
 }
-
-
-
-
-
 
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap');
