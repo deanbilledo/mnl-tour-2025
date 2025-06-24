@@ -1289,5 +1289,417 @@ body {
     display: none;
 }
 
+/* Gallery Section - Enhanced Glassmorphism Style */
+.gallery-section {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.8), rgba(232, 240, 254, 0.4));
+    padding: 48px 0;
+    position: relative;
+}
+
+.gallery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 70% 20%, rgba(251, 188, 4, 0.05) 0%, transparent 60%);
+    z-index: 0;
+}
+
+/* Gallery Grid Container */
+.gallery-grid {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    gap: 32px;
+}
+
+/* Gallery Category */
+.gallery-category {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid rgba(232, 234, 237, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.js-enabled .gallery-category {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.gallery-category.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-category:hover {
+    border-color: rgba(66, 133, 244, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(66, 133, 244, 0.1);
+}
+
+/* Category Title */
+.category-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #202124;
+    font-family: 'Google Sans', sans-serif;
+    text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 2px solid rgba(66, 133, 244, 0.2);
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, #4285f4, #34a853);
+    border-radius: 2px;
+}
+
+/* Gallery Photos Grid */
+.gallery-photos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* Gallery Images */
+.gallery-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    border: 2px solid rgba(232, 234, 237, 0.8);
+    background-color: #f8f9fa;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.gallery-image:hover::before {
+    opacity: 1;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+    border-color: #4285f4;
+    box-shadow: 
+        0 8px 24px rgba(66, 133, 244, 0.2),
+        0 0 0 4px rgba(66, 133, 244, 0.1);
+}
+/* Gallery Modal - Updated for proper centering */
+.gallery-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    animation: modalFadeIn 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.gallery-modal.show {
+    display: flex;
+}
+
+/* Modal Content - Properly centered */
+.modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalImageScale 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    margin: auto;
+}
+
+@keyframes modalImageScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Close Modal Button - Fixed positioning */
+.close-modal {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 10001;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+/* Modal Caption - Fixed positioning */
+.modal-caption {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 20px;
+    max-width: 80%;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+    z-index: 10001;
+}
+
+/* Enhanced Mobile Responsive for Modal */
+@media (max-width: 768px) {
+    .gallery-modal {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        max-width: 95vw;
+        max-height: 85vh;
+    }
+    
+    .close-modal {
+        top: 15px;
+        right: 15px;
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-caption {
+        font-size: 14px;
+        bottom: 15px;
+        padding: 10px 20px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-modal {
+        padding: 10px;
+    }
+    
+    .modal-content {
+        max-width: 98vw;
+        max-height: 80vh;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        font-size: 25px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .modal-caption {
+        font-size: 12px;
+        bottom: 10px;
+        padding: 8px 16px;
+        max-width: 95%;
+    }
+}
+/* Modal Caption */
+.modal-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 20px;
+    max-width: 80%;
+    font-weight: 500;
+    letter-spacing: 0.25px;
+}
+
+/* Enhanced Mobile Responsive for Gallery */
+@media (max-width: 768px) {
+    .gallery-grid {
+        padding: 0 16px;
+        gap: 24px;
+    }
+    
+    .gallery-category {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .category-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+    
+    .gallery-photos {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    
+    .gallery-image {
+        height: 120px;
+        border-radius: 10px;
+    }
+    
+    .close-modal {
+        top: 15px;
+        right: 15px;
+        font-size: 30px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .modal-caption {
+        font-size: 14px;
+        bottom: 15px;
+        padding: 10px 20px;
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-category {
+        padding: 16px;
+    }
+    
+    .category-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .gallery-photos {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+    }
+    
+    .gallery-image {
+        height: 100px;
+        border-radius: 8px;
+    }
+    
+    .modal-content {
+        max-width: 95%;
+        max-height: 85%;
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        font-size: 25px;
+        width: 35px;
+        height: 35px;
+    }
+    
+    .modal-caption {
+        font-size: 12px;
+        bottom: 10px;
+        padding: 8px 16px;
+    }
+}
+
+/* Gallery Category Staggered Animation */
+.gallery-category:nth-child(1) { animation-delay: 0.1s; }
+.gallery-category:nth-child(2) { animation-delay: 0.2s; }
+.gallery-category:nth-child(3) { animation-delay: 0.3s; }
+.gallery-category:nth-child(4) { animation-delay: 0.4s; }
+.gallery-category:nth-child(5) { animation-delay: 0.5s; }
+
+/* Section Headers Styling */
+.gallery-section .section-title {
+    font-size: 36px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #202124;
+    font-family: 'Google Sans', sans-serif;
+    text-align: center;
+}
+
+.gallery-section .section-intro {
+    font-size: 18px;
+    color: #5f6368;
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Hover effects for different categories */
+.gallery-category:nth-child(1):hover { border-color: rgba(66, 133, 244, 0.6); } /* Corporate Visits - Blue */
+.gallery-category:nth-child(2):hover { border-color: rgba(52, 168, 83, 0.6); } /* Manila Adventures - Green */
+.gallery-category:nth-child(3):hover { border-color: rgba(251, 188, 4, 0.6); } /* Tagaytay Escape - Yellow */
+.gallery-category:nth-child(4):hover { border-color: rgba(234, 67, 53, 0.6); } /* Baguio Highlights - Red */
+.gallery-category:nth-child(5):hover { border-color: rgba(156, 39, 176, 0.6); } /* Batch Memories - Purple */
+
+
+
+
+
+
+
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap');

@@ -44,6 +44,93 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// // Gallery Modal Functionality
+// function enlargeImage(img) {
+//     const modal = document.getElementById('imageModal');
+//     const modalImg = document.getElementById('modalImage');
+//     const caption = document.getElementById('modalCaption');
+    
+//     if (modal && modalImg && caption) {
+//         modal.classList.add('show');
+//         modalImg.src = img.src;
+//         modalImg.alt = img.alt;
+//         caption.textContent = img.alt;
+        
+//         // Prevent body scroll when modal is open
+//         document.body.style.overflow = 'hidden';
+        
+//         // Add keyboard support
+//         document.addEventListener('keydown', handleModalKeyPress);
+//     }
+// }
+
+function closeModal() {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.classList.remove('show');
+        
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+        
+        // Remove keyboard event listener
+        document.removeEventListener('keydown', handleModalKeyPress);
+    }
+}
+
+function handleModalKeyPress(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+}
+
+// Gallery Modal Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('imageModal');
+    const closeBtn = document.querySelector('.close-modal');
+    
+    // Close modal when clicking the X button
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeModal();
+        });
+    }
+    
+    // Close modal when clicking outside the image
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // Prevent modal from closing when clicking on the image itself
+    const modalContent = document.getElementById('modalImage');
+    if (modalContent) {
+        modalContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+    
+    // Gallery category animation on scroll
+    const galleryCategories = document.querySelectorAll('.gallery-category');
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    galleryCategories.forEach(category => {
+        galleryObserver.observe(category);
+    });
+});
+
 // Intersection Observer for Timeline Items
 const observerOptions = {
     threshold: 0.2,
@@ -81,48 +168,6 @@ document.querySelectorAll('.company-card, .adventure-card, .insight-card').forEa
     
     cardObserver.observe(card);
 });
-
-// Stats Counter Animation
-// const statsNumbers = document.querySelectorAll('.stat-number');
-// let hasAnimated = false;
-
-// const animateStats = () => {
-//     if (hasAnimated) return;
-    
-//     statsNumbers.forEach(stat => {
-//         const finalNumber = stat.textContent;
-//         if (finalNumber !== '∞') {
-//             let currentNumber = 0;
-//             const increment = parseInt(finalNumber) / 30;
-            
-//             const counter = setInterval(() => {
-//                 currentNumber += increment;
-//                 if (currentNumber >= parseInt(finalNumber)) {
-//                     stat.textContent = finalNumber;
-//                     clearInterval(counter);
-//                 } else {
-//                     stat.textContent = Math.floor(currentNumber);
-//                 }
-//             }, 50);
-//         }
-//     });
-    
-//     hasAnimated = true;
-// };
-
-// Trigger stats animation when hero section is visible
-const heroObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateStats();
-        }
-    });
-}, { threshold: 0.5 });
-
-const heroSection = document.querySelector('.hero');
-if (heroSection) {
-    heroObserver.observe(heroSection);
-}
 
 // Active Navigation Link Highlighting
 const sections = document.querySelectorAll('section[id]');
@@ -197,12 +242,6 @@ console.log('🤖 Remember: AI and Machine Learning are the future!');
 document.addEventListener('DOMContentLoaded', () => {
     console.log('✅ Industry Immersion Blog initialized');
     
-    // REMOVED: Problematic parallax effect that was causing background to move down
-    // The hero background will now stay fixed in place during scrolling
-});
-
-// Add this to your script.js file
-document.addEventListener('DOMContentLoaded', () => {
     // Make CTA buttons functional
     const ctaPrimary = document.querySelector('.cta-primary');
     const ctaSecondary = document.querySelector('.cta-secondary');
@@ -218,8 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (ctaSecondary) {
         ctaSecondary.addEventListener('click', () => {
-            // You can link this to a video or photo gallery later
-            document.querySelector('#adventures').scrollIntoView({ 
+            document.querySelector('#gallery').scrollIntoView({ 
                 behavior: 'smooth',
                 block: 'start'
             });
@@ -273,21 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.transitionDelay = `${index * 0.1}s`;
         }
         observer.observe(el);
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 120; // Account for fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-        });
     });
 
     // Mobile menu toggle
